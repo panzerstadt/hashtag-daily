@@ -23,7 +23,8 @@ access_token_secret = t_secrets.access_token_secret
 api = twitter.Api(consumer_key=consumer_key,
                   consumer_secret=consumer_secret,
                   access_token_key=access_token_key,
-                  access_token_secret=access_token_secret)
+                  access_token_secret=access_token_secret,
+                  sleep_on_rate_limit=True)
 
 
 # API call
@@ -92,7 +93,7 @@ def get_top_trends_from_twitter(country='Japan', exclude_hashtags=False, debug=F
 
     # compare db and now
     db_timestamp = str_2_datetime(trends_cache['timestamp'], input_format=time_format_full_no_timezone)
-    rq_timestamp = datetime.datetime.now()
+    rq_timestamp = datetime.datetime.now(tz=pytz.timezone('Japan'))
 
     time_diff = rq_timestamp - db_timestamp
     print('time since last trends API call: {}'.format(time_diff))
@@ -130,7 +131,7 @@ def get_top_hashtags_from_twitter_api(country='Japan', debug=False):
 
     trending_hashtags = [t['label'] for t in trends]
 
-    print(json.dumps(trends, indent=4, ensure_ascii=False))
+    #print(json.dumps(trends, indent=4, ensure_ascii=False))
 
     queries = [t['query'] for t in trends]
 
@@ -200,7 +201,9 @@ def get_top_hashtags_from_twitter(country='Japan', debug=False, cache_duration_m
 
     # compare db and now
     db_timestamp = str_2_datetime(hashtags_cache['timestamp'], input_format=time_format_full_no_timezone)
-    rq_timestamp = datetime.datetime.now()
+    db_timestamp = db_timestamp.replace(tzinfo=pytz.timezone('Japan'))
+
+    rq_timestamp = datetime.datetime.now(tz=pytz.timezone('Japan'))
 
     time_diff = rq_timestamp - db_timestamp
     print('time since last hashtags API call: {}'.format(time_diff))

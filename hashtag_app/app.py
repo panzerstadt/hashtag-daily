@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 from tools.baseutils import textify
-import time, datetime
-import ujson as json
+import time, datetime, pytz
 import schedule
 from threading import Thread
 
@@ -134,11 +133,13 @@ def all():
     full_db = load_db(database_path=DATABASE_PATH)
 
     db_init_timestamp = str_2_datetime(full_db['trends']['include_hashtags']['initial_timestamp'], input_format=time_format_full_no_timezone)
+    db_init_timestamp = db_init_timestamp.replace(tzinfo=pytz.timezone('Japan'))
     db_update_timestamp = str_2_datetime(full_db['trends']['include_hashtags']['timestamp'], input_format=time_format_full_no_timezone)
+    db_update_timestamp = db_update_timestamp.replace(tzinfo=pytz.timezone('Japan'))
 
     print("time since app start: {} minutes".format(str((time.time() - start_time) / 60)))
-    print("time since database init: {}".format((datetime.datetime.now() - db_init_timestamp).seconds/60))
-    print("time since last update: {} minutes".format((datetime.datetime.now() - db_update_timestamp).seconds/60))
+    print("time since database init: {}".format((datetime.datetime.now(tz=pytz.timezone('Japan')) - db_init_timestamp).seconds/60))
+    print("time since last update: {} minutes".format((datetime.datetime.now(tz=pytz.timezone('Japan')) - db_update_timestamp).seconds/60))
 
     return jsonify(full_db)
 
