@@ -1,4 +1,7 @@
-## build
+## build (do only this if you want to update your app)
+#### before
+delete the app of the same name in `kubernetes engine > workloads`
+#### then
 docker build -t hashtag-app .
 docker tag hashtag-app gcr.io/dan-tokyo-server/hashtag-app:latest
 gcloud docker -- push gcr.io/dan-tokyo-server/hashtag-app:latest
