@@ -13,6 +13,7 @@ from tools.baseutils import get_filepath
 db_path = get_filepath('./db/daily_database.json')
 time_format_full_no_timezone = '%Y-%m-%d %H:%M:%S'
 time_format_twitter_trends = '%Y-%m-%dT%H:%M:%SZ'
+jp_timezone = pytz.timezone('Asia/Tokyo')
 
 t_secrets = Twitter()
 consumer_key = t_secrets.consumer_key
@@ -66,8 +67,8 @@ def get_top_trends_from_twitter_api(country='Japan', exclude_hashtags=True):
 
         # match time with timezone
         timestamp_str = trend['timestamp']
-        timestamp_dt = str_2_datetime(timestamp_str, input_format=time_format_twitter_trends).replace(tzinfo=pytz.utc)
-        timestamp_local = timestamp_dt.astimezone(tz=pytz.timezone('Japan'))
+        timestamp_dt = str_2_datetime(timestamp_str, input_format=time_format_twitter_trends).astimezone(tz=pytz.utc)
+        timestamp_local = timestamp_dt.astimezone(tz=jp_timezone)
         timestamp_local_str = datetime_2_str(timestamp_local, output_format=time_format_twitter_trends)
 
         output.append({
@@ -93,11 +94,17 @@ def get_top_trends_from_twitter(country='Japan', exclude_hashtags=False, debug=F
 
     # compare db and now
     db_timestamp = str_2_datetime(trends_cache['timestamp'], input_format=time_format_full_no_timezone)
-    rq_timestamp = datetime.datetime.now(tz=pytz.timezone('Japan'))
+    db_timestamp = db_timestamp.astimezone(tz=jp_timezone)
+
+    rq_timestamp = datetime.datetime.now(tz=jp_timezone)
 
     time_diff = rq_timestamp - db_timestamp
-    print('time since last trends API call: {}'.format(time_diff))
+    print('time since last trends API call: {} (h:m:s)'.format(time_diff))
+    print('time diff in seconds: {}'.format(time_diff.seconds))
+    print('time in db: {}'.format(db_timestamp))
+    print('time in rq: {}'.format(rq_timestamp))
     if time_diff.seconds < cache_duration_mins*60:
+        print('less than cache duration, returning cache')
         output_json = json.dumps(trends_cache['content'], ensure_ascii=False)
         return output_json
     else:
@@ -201,9 +208,9 @@ def get_top_hashtags_from_twitter(country='Japan', debug=False, cache_duration_m
 
     # compare db and now
     db_timestamp = str_2_datetime(hashtags_cache['timestamp'], input_format=time_format_full_no_timezone)
-    db_timestamp = db_timestamp.replace(tzinfo=pytz.timezone('Japan'))
+    db_timestamp = db_timestamp.astimezone(tz=jp_timezone)
 
-    rq_timestamp = datetime.datetime.now(tz=pytz.timezone('Japan'))
+    rq_timestamp = datetime.datetime.now(tz=jp_timezone)
 
     time_diff = rq_timestamp - db_timestamp
     print('time since last hashtags API call: {}'.format(time_diff))
