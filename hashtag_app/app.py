@@ -1,4 +1,6 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+
 from tools.baseutils import textify
 import time, datetime, pytz
 import schedule
@@ -11,10 +13,19 @@ from tools.time_utils import datetime_2_str, str_2_datetime
 # pretty interface
 from flasgger import Swagger
 
+allowed_domains = [
+    r'*',
+]
+
 application = Flask(__name__)
 swagger = Swagger(application)
 application.config.update(JSON_AS_ASCII=False,
                           JSONIFY_PRETTYPRINT_REGULAR=True)
+CORS(application,
+     origins=allowed_domains,
+     resources=r'*',
+     supports_credentials=True)
+
 
 start_time = time.time()
 update_start = time.time()
@@ -143,6 +154,32 @@ def all():
     print("time since last update: {:.2f} minutes".format((datetime.datetime.now(tz=jp_timezone) - db_update_timestamp).seconds/60))
 
     return jsonify(full_db)
+
+
+@application.route('/twitter/trends', methods={'GET'})
+def trends():
+    full_db = load_db(database_path=DATABASE_PATH)
+
+    db_init_timestamp = str_2_datetime(full_db['trends']['include_hashtags']['initial_timestamp'],
+                                       input_format=time_format_full_no_timezone)
+    db_init_timestamp = db_init_timestamp.astimezone(tz=jp_timezone)
+    db_update_timestamp = str_2_datetime(full_db['trends']['include_hashtags']['timestamp'],
+                                         input_format=time_format_full_no_timezone)
+    db_update_timestamp = db_update_timestamp.astimezone(tz=jp_timezone)
+
+    print("time since app start: {:.2f} minutes".format((time.time() - start_time) / 60))
+    print("time since database init: {:.2f} hours".format(
+        (datetime.datetime.now(tz=jp_timezone) - db_init_timestamp).seconds / 3600))
+    print("time since last update: {:.2f} minutes".format(
+        (datetime.datetime.now(tz=jp_timezone) - db_update_timestamp).seconds / 60))
+
+    trends_output = {
+        "results": full_db['trends']['include_hashtags'],
+        "status": 'ok'
+    }
+
+    return jsonify(trends_output)
+
 
 
 if __name__ == '__main__':
