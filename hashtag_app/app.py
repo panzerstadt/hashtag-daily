@@ -33,6 +33,7 @@ CORS(application,
 start_time = time.time()
 update_start = time.time()
 time_format_full_no_timezone = '%Y-%m-%d %H:%M:%S'
+time_format_full_with_timezone = '%Y-%m-%d %H:%M:%S%z'
 jp_timezone = pytz.timezone('Asia/Tokyo')
 
 DATABASE_PATH = './db/daily_database.json'
@@ -40,23 +41,23 @@ DATABASE_STRUCTURE = {
     "trends": {
         "include_hashtags": {
             "timestamp": '1999-01-01 00:00:00',
-            "initial_timestamp": datetime_2_str(datetime.datetime.now(), output_format=time_format_full_no_timezone),
+            "initial_timestamp": datetime_2_str(datetime.datetime.now(), output_format=time_format_full_with_timezone),
             "content": []
         },
         "exclude_hashtags": {
             "timestamp": '1999-01-01 00:00:00',
-            "initial_timestamp": datetime_2_str(datetime.datetime.now(), output_format=time_format_full_no_timezone),
+            "initial_timestamp": datetime_2_str(datetime.datetime.now(), output_format=time_format_full_with_timezone),
             "content": []
         }
     },
     "hashtags": {
         "timestamp": '1999-01-01 00:00:00',
-        "initial_timestamp": datetime_2_str(datetime.datetime.now(), output_format=time_format_full_no_timezone),
+        "initial_timestamp": datetime_2_str(datetime.datetime.now(), output_format=time_format_full_with_timezone),
         "content": []
     }
 }
 
-REFRESH_MINS = 15
+REFRESH_MINS = 5
 
 
 def run_schedule():
@@ -147,14 +148,12 @@ def hashtags_twitter_only():
 def all():
     full_db = load_db(database_path=DATABASE_PATH)
 
-    db_init_timestamp = str_2_datetime(full_db['trends']['include_hashtags']['initial_timestamp'], input_format=time_format_full_no_timezone)
-    db_init_timestamp = db_init_timestamp.astimezone(tz=jp_timezone)
-    db_update_timestamp = str_2_datetime(full_db['trends']['include_hashtags']['timestamp'], input_format=time_format_full_no_timezone)
-    db_update_timestamp = db_update_timestamp.astimezone(tz=jp_timezone)
+    db_init_timestamp = str_2_datetime(full_db['trends']['include_hashtags']['initial_timestamp'], input_format=time_format_full_with_timezone)
+    db_update_timestamp = str_2_datetime(full_db['trends']['include_hashtags']['timestamp'], input_format=time_format_full_with_timezone)
 
     print("time since app start: {:.2f} minutes".format((time.time() - start_time) / 60))
-    print("time since database init: {:.2f} hours".format((datetime.datetime.now(tz=jp_timezone) - db_init_timestamp).seconds/3600))
-    print("time since last update: {:.2f} minutes".format((datetime.datetime.now(tz=jp_timezone) - db_update_timestamp).seconds/60))
+    print("time since database init: {:.2f} hours".format((datetime.datetime.now(tz=pytz.utc) - db_init_timestamp).seconds/3600))
+    print("time since last update: {:.2f} minutes".format((datetime.datetime.now(tz=pytz.utc) - db_update_timestamp).seconds/60))
 
     return jsonify(full_db)
 
@@ -164,17 +163,21 @@ def trends():
     full_db = load_db(database_path=DATABASE_PATH)
 
     db_init_timestamp = str_2_datetime(full_db['trends']['include_hashtags']['initial_timestamp'],
-                                       input_format=time_format_full_no_timezone)
-    db_init_timestamp = db_init_timestamp.astimezone(tz=jp_timezone)
+                                       input_format=time_format_full_with_timezone)
+
     db_update_timestamp = str_2_datetime(full_db['trends']['include_hashtags']['timestamp'],
-                                         input_format=time_format_full_no_timezone)
-    db_update_timestamp = db_update_timestamp.astimezone(tz=jp_timezone)
+                                         input_format=time_format_full_with_timezone)
+
 
     print("time since app start: {:.2f} minutes".format((time.time() - start_time) / 60))
-    print("time since database init: {:.2f} hours".format(
-        (datetime.datetime.now(tz=jp_timezone) - db_init_timestamp).seconds / 3600))
+    print("time since database init: {}".format(
+        (datetime.datetime.now(tz=pytz.utc) - db_init_timestamp)))
     print("time since last update: {:.2f} minutes".format(
-        (datetime.datetime.now(tz=jp_timezone) - db_update_timestamp).seconds / 60))
+        (datetime.datetime.now(tz=pytz.utc) - db_update_timestamp).seconds / 60))
+    print('\ndebug:')
+    print('time now: {}'.format(datetime.datetime.now(tz=pytz.utc)))
+    print('db init time: {}'.format(db_init_timestamp))
+    print('diff: {}'.format(datetime.datetime.now(tz=pytz.utc) - db_init_timestamp))
 
     trends_output = {
         "results": full_db['trends']['include_hashtags'],

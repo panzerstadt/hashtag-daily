@@ -8,7 +8,8 @@ gcloud docker -- push gcr.io/dan-tokyo-server/hashtag-app-backend:latest
 kubectl run hashtag-app-backend --image=gcr.io/dan-tokyo-server/hashtag-app-backend:latest --port=5000
 
 ## test run
-docker run -d -p 5000:5000 hashtag-app-backend
+docker run -p 5000:5000 hashtag-app-backend
+(don't run detached since you can't see the errors)
 ## stop test run
 docker ps
 (copy docker id)

@@ -11,6 +11,7 @@ from tools.time_utils import str_2_datetime, datetime_2_str
 from tools.baseutils import get_filepath
 
 db_path = get_filepath('./db/daily_database.json')
+time_format_full_with_timezone = '%Y-%m-%d %H:%M:%S%z'
 time_format_full_no_timezone = '%Y-%m-%d %H:%M:%S'
 time_format_twitter_trends = '%Y-%m-%dT%H:%M:%SZ'
 jp_timezone = pytz.timezone('Asia/Tokyo')
@@ -66,15 +67,16 @@ def get_top_trends_from_twitter_api(country='Japan', exclude_hashtags=True):
             tw_volume = [0]
 
         # match time with timezone
-        timestamp_str = trend['timestamp']
-        timestamp_dt = str_2_datetime(timestamp_str, input_format=time_format_twitter_trends).astimezone(tz=pytz.utc)
-        timestamp_local = timestamp_dt.astimezone(tz=jp_timezone)
-        timestamp_local_str = datetime_2_str(timestamp_local, output_format=time_format_twitter_trends)
+        timestamp_str = trend['timestamp']  # this is utc
+        timestamp_dt = str_2_datetime(timestamp_str, input_format=time_format_twitter_trends).replace(tzinfo=pytz.utc)
+
+        # timestamp_local = timestamp_dt.astimezone(tz=pytz.utc)
+        timestamp_utc_str = datetime_2_str(timestamp_dt, output_format=time_format_full_with_timezone)
 
         output.append({
             "label": trend['name'],
             "volume": tw_volume,
-            "time": timestamp_local_str,
+            "time": timestamp_utc_str,
             "query": trend['query'],
             "url": trend['url']
         })
@@ -93,10 +95,13 @@ def get_top_trends_from_twitter(country='Japan', exclude_hashtags=False, debug=F
         trends_cache = trends_db['include_hashtags']
 
     # compare db and now
-    db_timestamp = str_2_datetime(trends_cache['timestamp'], input_format=time_format_full_no_timezone)
-    db_timestamp = db_timestamp.astimezone(tz=jp_timezone)
+    try:
+        db_timestamp = str_2_datetime(trends_cache['timestamp'], input_format=time_format_full_with_timezone)
+    except ValueError:
+        db_timestamp = str_2_datetime(trends_cache['timestamp'], input_format=time_format_full_no_timezone)
+        db_timestamp = db_timestamp.astimezone(tz=pytz.utc)
 
-    rq_timestamp = datetime.datetime.now(tz=jp_timezone)
+    rq_timestamp = datetime.datetime.now(tz=pytz.utc)
 
     time_diff = rq_timestamp - db_timestamp
     print('time since last trends API call: {} (h:m:s)'.format(time_diff))
@@ -117,10 +122,10 @@ def get_top_trends_from_twitter(country='Japan', exclude_hashtags=False, debug=F
             
         if exclude_hashtags:
             cache_db['trends']['exclude_hashtags']['content'] = output_list
-            cache_db['trends']['exclude_hashtags']['timestamp'] = datetime_2_str(rq_timestamp, output_format=time_format_full_no_timezone)
+            cache_db['trends']['exclude_hashtags']['timestamp'] = datetime_2_str(rq_timestamp, output_format=time_format_full_with_timezone)
         else:
             cache_db['trends']['include_hashtags']['content'] = output_list
-            cache_db['trends']['include_hashtags']['timestamp'] = datetime_2_str(rq_timestamp, output_format=time_format_full_no_timezone)
+            cache_db['trends']['include_hashtags']['timestamp'] = datetime_2_str(rq_timestamp, output_format=time_format_full_with_timezone)
 
         update_db(cache_db, database_path=db_path, debug=debug)
         return output_json
@@ -207,10 +212,10 @@ def get_top_hashtags_from_twitter(country='Japan', debug=False, cache_duration_m
     hashtags_cache = cache_db['hashtags']
 
     # compare db and now
-    db_timestamp = str_2_datetime(hashtags_cache['timestamp'], input_format=time_format_full_no_timezone)
-    db_timestamp = db_timestamp.astimezone(tz=jp_timezone)
+    db_timestamp = str_2_datetime(hashtags_cache['timestamp'], input_format=time_format_full_with_timezone)
+    db_timestamp = db_timestamp.astimezone(tz=pytz.utc)
 
-    rq_timestamp = datetime.datetime.now(tz=jp_timezone)
+    rq_timestamp = datetime.datetime.now(tz=pytz.utc)
 
     time_diff = rq_timestamp - db_timestamp
     print('time since last hashtags API call: {}'.format(time_diff))
@@ -227,7 +232,7 @@ def get_top_hashtags_from_twitter(country='Japan', debug=False, cache_duration_m
             output_list = hashtags_cache['content'] + output_list
 
         cache_db['hashtags']['content'] = output_list
-        cache_db['hashtags']['timestamp'] = datetime_2_str(rq_timestamp, output_format=time_format_full_no_timezone)
+        cache_db['hashtags']['timestamp'] = datetime_2_str(rq_timestamp, output_format=time_format_full_with_timezone)
 
         update_db(cache_db, database_path=db_path, debug=debug)
         return output_json
