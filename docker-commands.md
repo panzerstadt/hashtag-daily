@@ -2,13 +2,20 @@
 #### before
 delete the app of the same name in `kubernetes engine > workloads`
 #### then
-docker build -t hashtag-app .
-docker tag hashtag-app gcr.io/dan-tokyo-server/hashtag-app:latest
-gcloud docker -- push gcr.io/dan-tokyo-server/hashtag-app:latest
-kubectl run hashtag-app --image=gcr.io/dan-tokyo-server/hashtag-app:latest --port=5000
+docker build -t hashtag-app-backend .
+docker tag hashtag-app-backend gcr.io/dan-tokyo-server/hashtag-app-backend:latest
+gcloud docker -- push gcr.io/dan-tokyo-server/hashtag-app-backend:latest
+kubectl run hashtag-app-backend --image=gcr.io/dan-tokyo-server/hashtag-app-backend:latest --port=5000
+
+## test run
+docker run -d -p 5000:5000 hashtag-app-backend
+## stop test run
+docker ps
+(copy docker id)
+docker stop <docker-id>
 
 ## deploy
-kubectl expose deployment hashtag-app --type=LoadBalancer --target-port=5000 --port 80
+kubectl expose deployment hashtag-app-backend --type=LoadBalancer --target-port=5000 --port 80
 
 ## one time
 gcloud auth login
