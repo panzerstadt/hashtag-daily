@@ -8,6 +8,7 @@
       <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hashtag_app/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/hashtag_app/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hashtag_app/db/daily_database.json" beforeDir="false" afterPath="$PROJECT_DIR$/hashtag_app/db/daily_database.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hashtag_app/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/hashtag_app/requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,33 +31,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="requirements.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hashtag_app/requirements.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" selection-start-line="26" selection-end-line="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="requirements.txt" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/requirements.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="14" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="requirements-dev.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hashtag_app/requirements-dev.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="17" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="twitter_api.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hashtag_app/tools/twitter_api.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -69,11 +43,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="daily_database.json" pinned="false" current-in-tab="false">
+      <file leaf-file-name="daily_database.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hashtag_app/db/daily_database.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19394">
-              <caret line="88261" column="56" selection-start-line="88261" selection-start-column="56" selection-end-line="88261" selection-end-column="56" />
+            <state relative-caret-position="414">
+              <caret line="26441" column="1" selection-start-line="26441" selection-start-column="1" selection-end-line="26441" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -125,9 +99,9 @@
         <option value="$PROJECT_DIR$/hashtag_app/hidden/hidden.py" />
         <option value="$PROJECT_DIR$/hashtag_app/tools/twitter_api.py" />
         <option value="$PROJECT_DIR$/hashtag_app/tools/time_utils.py" />
-        <option value="$PROJECT_DIR$/hashtag_app/db/daily_database.json" />
         <option value="$PROJECT_DIR$/hashtag_app/app.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/hashtag_app/db/daily_database.json" />
       </list>
     </option>
   </component>
@@ -399,13 +373,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hashtag_app/db/daily_database.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19394">
-          <caret line="88261" column="56" selection-start-line="88261" selection-start-column="56" selection-end-line="88261" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hashtag_app/tools/twitter_api.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="50">
@@ -413,23 +380,6 @@
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hashtag_app/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="196" column="13" selection-start-line="196" selection-start-column="13" selection-end-line="196" selection-end-column="13" />
-          <folding>
-            <element signature="e#47#88#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hashtag_app/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
         </state>
       </provider>
     </entry>
@@ -444,6 +394,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="16" column="14" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hashtag_app/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hashtag_app/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="196" column="13" selection-start-line="196" selection-start-column="13" selection-end-line="196" selection-end-column="13" />
+          <folding>
+            <element signature="e#47#88#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hashtag_app/db/daily_database.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="26441" column="1" selection-start-line="26441" selection-start-column="1" selection-end-line="26441" selection-end-column="1" />
         </state>
       </provider>
     </entry>
