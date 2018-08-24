@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be5fae22-8203-4a55-a420-2d1f37376fe5" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/hashtag-daily-collection.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/hashtag-daily-collection.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-commands.md" beforeDir="false" afterPath="$PROJECT_DIR$/docker-commands.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hashtag_app/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/hashtag_app/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hashtag_app/db/daily_database.json" beforeDir="false" afterPath="$PROJECT_DIR$/hashtag_app/db/daily_database.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hashtag_app/tools/time_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/hashtag_app/tools/time_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hashtag_app/tools/twitter_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/hashtag_app/tools/twitter_api.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,14 +18,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="app.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hashtag_app/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="176" column="13" selection-start-line="176" selection-start-column="13" selection-end-line="176" selection-end-column="13" />
+            <state relative-caret-position="303">
+              <caret line="196" column="13" selection-start-line="196" selection-start-column="13" selection-end-line="196" selection-end-column="13" />
               <folding>
                 <element signature="e#47#88#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="requirements.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hashtag_app/requirements.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="26" selection-start-line="26" selection-end-line="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="requirements.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/requirements.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="16" column="14" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="requirements-dev.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hashtag_app/requirements-dev.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="24" column="17" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -45,8 +72,8 @@
       <file leaf-file-name="daily_database.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hashtag_app/db/daily_database.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6974">
-              <caret line="87433" column="56" selection-start-line="87433" selection-start-column="56" selection-end-line="87433" selection-end-column="56" />
+            <state relative-caret-position="19394">
+              <caret line="88261" column="56" selection-start-line="88261" selection-start-column="56" selection-end-line="88261" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -69,6 +96,7 @@
       <find>time_format_full_no_timezone</find>
       <find>try</find>
       <find>JST</find>
+      <find>init</find>
     </findStrings>
     <replaceStrings>
       <replace>jp_timezone</replace>
@@ -99,6 +127,7 @@
         <option value="$PROJECT_DIR$/hashtag_app/tools/time_utils.py" />
         <option value="$PROJECT_DIR$/hashtag_app/db/daily_database.json" />
         <option value="$PROJECT_DIR$/hashtag_app/app.py" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
       </list>
     </option>
   </component>
@@ -250,15 +279,16 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="344" y="33" width="1265" height="947" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15996784" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32941177" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32941177" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32941177" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32941177" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -371,8 +401,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hashtag_app/db/daily_database.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6974">
-          <caret line="87433" column="56" selection-start-line="87433" selection-start-column="56" selection-end-line="87433" selection-end-column="56" />
+        <state relative-caret-position="19394">
+          <caret line="88261" column="56" selection-start-line="88261" selection-start-column="56" selection-end-line="88261" selection-end-column="56" />
         </state>
       </provider>
     </entry>
@@ -388,11 +418,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hashtag_app/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="176" column="13" selection-start-line="176" selection-start-column="13" selection-end-line="176" selection-end-column="13" />
+        <state relative-caret-position="303">
+          <caret line="196" column="13" selection-start-line="196" selection-start-column="13" selection-end-line="196" selection-end-column="13" />
           <folding>
             <element signature="e#47#88#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hashtag_app/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hashtag_app/requirements-dev.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="17" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="14" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
         </state>
       </provider>
     </entry>
