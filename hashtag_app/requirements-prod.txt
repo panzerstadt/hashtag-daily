@@ -14,7 +14,7 @@ itsdangerous==0.24
 Jinja2==2.10
 jsonschema==2.6.0
 MarkupSafe==1.0
-mistune==0.8.3
+mistune==2.0.3
 mod-wsgi==4.6.4
 oauthlib==2.1.0
 pycparser==2.18
